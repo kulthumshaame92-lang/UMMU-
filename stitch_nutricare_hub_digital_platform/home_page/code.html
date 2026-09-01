@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NutriCare Hub - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-container-highest": "#dce2f3",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9ff",
+                        "on-primary-container": "#613b00",
+                        "primary": "#855300",
+                        "surface-dim": "#d3daea",
+                        "on-secondary-fixed": "#002113",
+                        "inverse-primary": "#ffb95f",
+                        "primary-fixed-dim": "#ffb95f",
+                        "tertiary": "#795900",
+                        "surface": "#f9f9ff",
+                        "on-tertiary-container": "#584000",
+                        "on-surface-variant": "#534434",
+                        "surface-container": "#e7eefe",
+                        "on-secondary-container": "#00714d",
+                        "on-surface": "#151c27",
+                        "tertiary-fixed-dim": "#f9bd22",
+                        "secondary-container": "#6cf8bb",
+                        "on-primary-fixed-variant": "#653e00",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffddb8",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-fixed": "#ffdf9f",
+                        "on-background": "#151c27",
+                        "outline-variant": "#d8c3ad",
+                        "surface-variant": "#dce2f3",
+                        "surface-bright": "#f9f9ff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "outline": "#867461",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#2a1700",
+                        "surface-tint": "#855300",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-container": "#f59e0b",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e2e8f8",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "tertiary-container": "#e0a800",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#261a00",
+                        "secondary": "#006c49",
+                        "inverse-surface": "#2a313d",
+                        "secondary-fixed": "#6ffbbe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "caption": ["Manrope"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-sm": ["Plus Jakarta Sans"],
+                        "label-md": ["Manrope"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-sm": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(133, 83, 0, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #855300, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg antialiased selection:bg-primary-container selection:text-on-primary-container pt-20">
+<!-- TopNavBar -->
+<nav class="bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md shadow-sm fixed top-0 w-full z-50 transition-all duration-300 ease-in-out border-b border-surface-container">
+<div class="flex justify-between items-center px-gutter max-w-container-max mx-auto h-20">
+<a class="font-display-sm text-display-sm font-bold text-primary dark:text-primary-fixed-dim tracking-tight hover:opacity-80 transition-opacity" href="#">
+                NutriCare Hub
+            </a>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary pb-1 font-label-md text-label-md hover:opacity-80 transition-opacity" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-label-md text-label-md hover:opacity-80" href="#">Recipes</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-label-md text-label-md hover:opacity-80" href="#">Education</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-label-md text-label-md hover:opacity-80" href="#">Profile</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="hidden md:block bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5">
+                    Book Now
+                </button>
+<button class="md:hidden text-on-surface p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center pt-10 pb-xl overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent z-10"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="A bright, sunlit kitchen counter featuring an abundant, beautiful arrangement of fresh citrus fruits, vibrant green leafy vegetables, and colorful berries. The scene is styled for a premium boutique wellness aesthetic with soft, natural lighting creating an inviting, healthy, and optimistic mood. The colors are dominated by warm ambers and vitality greens against a clean white backdrop." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6io293iCAZ16xhmAME_z0qHFrxSsiW-pmCKeADs2lshSUsF3QlAyqy-pcaIpi_Yg9QZ9cB4v2pDv2Kk8rogNkiquDfON8e7io7pVzkRi9qtoijUHapSn9rWN9nLzr-KazoEgx5mFMuoggkl9FLXc1YQ-R91gmFWeK8-gziIZTiuYNVdhjb5-pgX-kYfospG-xBsisZqu5TnHmB8xu-Lxd-Rm8gSZPVOpljQJ_RKJnbgXp2TMsreKhhw')"></div>
+</div>
+<div class="relative z-10 w-full px-gutter max-w-container-max mx-auto">
+<div class="max-w-2xl">
+<span class="inline-block px-4 py-1.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-md text-label-md mb-6 border border-secondary-container">
+                        Premium Wellness Nutrition
+                    </span>
+<h1 class="font-display-lg text-display-lg mb-6 text-on-surface">
+                        Your Journey to a <br/><span class="text-gradient">Healthier You</span> Starts Here.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-xl">
+                        Experience a personalized approach to nutrition that combines clinical expertise with the warmth of boutique wellness. Tailored plans, expert guidance, and lasting results.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-[0_8px_24px_rgba(245,158,11,0.25)] hover:shadow-[0_12px_32px_rgba(245,158,11,0.35)] transform hover:-translate-y-1">
+                            Get Your Personalized Plan
+                        </button>
+<button class="bg-transparent border border-outline text-on-surface px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-all">
+                            Explore Services
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Overview (Bento Grid) -->
+<section class="py-xl px-gutter bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-lg">
+<h2 class="font-display-sm text-display-sm text-on-surface mb-4">Holistic Nutrition Approach</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Discover a comprehensive ecosystem designed to elevate your well-being through education, personalized planning, and ongoing support.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+<!-- Education Card (Spans 2 cols on desktop) -->
+<div class="md:col-span-2 glass-card rounded-xl p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl -mr-20 -mt-20 transition-transform group-hover:scale-110"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">local_library</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Nutritional Education</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Empower yourself with evidence-based knowledge. Access our curated library of articles, webinars, and expert insights to understand the 'why' behind your diet.</p>
+</div>
+<a class="inline-flex items-center text-primary font-label-md text-label-md group-hover:underline mt-4" href="#">
+                                Learn More <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Meal Guidance Card -->
+<div class="glass-card rounded-xl p-8 relative overflow-hidden group">
+<div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-secondary-container/20 to-transparent"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Meal Guidance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Delicious, nutrient-dense meal plans tailored to your specific dietary needs and lifestyle goals.</p>
+</div>
+<div class="flex gap-2 mt-4">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs rounded-full font-caption">Vegan Options</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs rounded-full font-caption">Gluten-Free</span>
+</div>
+</div>
+</div>
+<!-- Support Card -->
+<div class="md:col-span-3 glass-card rounded-xl p-8 flex flex-col md:flex-row items-center gap-8 group">
+<div class="flex-1">
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Personalized Support</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Continuous guidance from certified nutritionists. Regular check-ins, progress tracking, and adjustments to ensure you stay on the path to vitality.</p>
+</div>
+<div class="w-full md:w-1/3 h-48 rounded-lg overflow-hidden shrink-0 relative">
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply z-10"></div>
+<img alt="App interface" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A close-up shot of a modern smartphone displaying a health tracking app, resting on a clean wooden desk next to a glass of lemon water. The aesthetic is bright, minimalist, and focuses on wellness technology in a boutique setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN1KetbNCKbl5X3yixA-C93B9SFju138SPhGmJU5bqAb5sj4w-81mPezvINABK3Z0QQIs4U9aXzMvGVWYCQmSKiWGVQyUqzbxEyzR9CZPFElQINYwk4KiCDUifb8ReO_bcr6QTLysP1dUja6Uqmw-E_A50LuejIoVPUijQTw3zVDirIHAaWo9hwHRYhLDPPXLmiXi1xKwnvIYmiFwNoIna_AdINEuzkvO3qP8pF40DdES0KBzWO7FRIA"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-xl px-gutter bg-surface-container-low">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-lg">
+<h2 class="font-display-sm text-display-sm text-on-surface mb-4">Client Journeys</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Real stories of transformation from individuals who embraced the NutriCare approach.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Testimonial 1 -->
+<div class="bg-surface rounded-xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-surface-container border-opacity-50 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-center gap-4 mb-6">
+<img alt="Sarah J." class="w-16 h-16 rounded-full object-cover border-2 border-primary-container" data-alt="A professional headshot of a smiling woman in her 30s, natural lighting, wearing a light linen shirt, exuding a healthy and vibrant energy. The background is a soft, out-of-focus wellness clinic setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHlNkHNkSKNx3gWSt4xTrNcMRKA_P8PsTYGuMQRxSgXjol1W0TnM3MAqzaiyoB8389kW0QHaYbAn85YWrTyO43tALJDTspY7GDPhbM0I6pkiUwhnwX34ZX77a05cXV4hUfsYy4Tyd63604EWseUA52SGV7DpaFvM67MpGUQo5FbHqV7zCbBR0DiP8VEGl2kSFcw280W4kFyS8f4vKsHmGgwqK8zCOhP2m9W5mAhLcGMwxwFllxiaBGGA"/>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface text-lg">Sarah Jenkins</h4>
+<p class="font-caption text-caption text-on-surface-variant">Holistic Plan Member</p>
+</div>
+<div class="ml-auto flex text-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant italic">"The personalized support I received was unparalleled. It didn't feel like a restrictive diet, but rather a completely new way of understanding my body's needs. The boutique feel of the app made every interaction a joy."</p>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-surface rounded-xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-surface-container border-opacity-50 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-center gap-4 mb-6">
+<img alt="David M." class="w-16 h-16 rounded-full object-cover border-2 border-primary-container" data-alt="A portrait of a healthy, active man in his 40s in subtle athletic wear, standing outdoors with a soft, warm sunlight illuminating his face. The mood is confident and revitalized, fitting a premium wellness brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKltQc9vAP199gJQEl-pt5A93Yo1a1IEA5njzfAykQ1ennj9JpS-apb7ExfyBwNwX3-aiOTzZFCh13FyhQbX13pz9McqvPiDuBYsQtj_MxIEO7H51becY4LaJ1eIT_bzf4DZZjsb0jR-kSHIb4w4N1jnwmVm5_jqOvdXTZQ_8Cm4kyOhHjry2YwUkODDoJ-iugjw4OD4GGTA8QtEbwYi_QFbM8y1mGx88cVSUW6hqCu8OaG7V3FEMEDQ"/>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface text-lg">David Miller</h4>
+<p class="font-caption text-caption text-on-surface-variant">Performance Nutrition Client</p>
+</div>
+<div class="ml-auto flex text-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant italic">"NutriCare Hub transformed my relationship with food. The meal guidance is practical, and the educational resources are incredibly insightful. I finally feel like I have a sustainable plan."</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-surface-container">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-md opacity-100 hover:opacity-80 transition-all duration-300 ease-in-out">
+<div class="font-headline-md text-headline-md font-bold text-primary mb-4 md:mb-0">
+                NutriCare Hub
+            </div>
+<div class="flex flex-wrap justify-center gap-6 font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Contact Support</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Careers</a>
+</div>
+<div class="text-on-surface-variant font-caption text-caption mt-4 md:mt-0 text-center md:text-right">
+                © 2024 NutriCare Hub. Boutique Wellness Nutrition.
+            </div>
+</div>
+</footer>
+</body></html>

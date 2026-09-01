@@ -1,0 +1,37 @@
+# NutriCare Hub - Project Requirements
+
+## Objective
+To provide reliable nutrition education, healthy meal guidance, dietary information, and personalized nutrition support through qualified professionals.
+
+## Core Features
+- Health & Dietary Intake: Users enter basic health and dietary info.
+- Goal Setting: Users identify nutrition goals.
+- Personalized Diet Plans: View and manage custom plans.
+- Recipe Hub: Search and explore healthy recipes.
+- Progress Tracking: Track nutrition and dietary progress.
+- Professional Management: Nutritionists create and manage diet plans.
+- Consultations: Online booking system for consultations.
+- Admin Control: Full platform management (users, nutritionists, plans, recipes, payments).
+
+## Target Screens
+1. **Home Page**: Hero with healthy visuals, services overview, and testimonials.
+2. **About Us Page**: Mission, vision, and team of dietitians.
+3. **User Profile**: Dashboard for personal info and goals.
+4. **Nutritionist/Dietitian Profile**: Professional bio, specialties, and booking link.
+5. **Nutrition Assessment Page**: Multi-step form for health data entry.
+6. **Personalized Diet Plan Page**: Detailed view of the custom plan.
+7. **Meal Planner Page**: Interactive calendar/scheduler for meals.
+8. **Healthy Recipes Page**: Searchable grid of recipes with filtering.
+9. **Food & Nutrition Education Page**: Articles, tips, and dietary info.
+10. **Consultation/Booking Page**: Selection of nutritionist and time slots.
+11. **Checkout Page**: Secure payment for plans or consultations.
+12. **Payment History Page**: User-specific transaction list.
+13. **Admin Panel**: Management dashboard for all platform entities.
+14. **Sign Up / Sign In**: User and professional onboarding.
+15. **Recent Activities & Progress Tracking**: Visual charts and logs of dietary habits.
+
+## Design Aesthetic
+- Minimalistic yet Bold.
+- Modern, clean, and professional.
+- "Nutrition & Dietetics" aesthetic.
+- Responsive landscape (desktop) layout.

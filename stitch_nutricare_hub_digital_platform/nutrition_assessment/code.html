@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NutriCare Hub - Nutrition Assessment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-container-highest": "#dce2f3",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9ff",
+                        "on-primary-container": "#613b00",
+                        "primary": "#855300",
+                        "surface-dim": "#d3daea",
+                        "on-secondary-fixed": "#002113",
+                        "inverse-primary": "#ffb95f",
+                        "primary-fixed-dim": "#ffb95f",
+                        "tertiary": "#795900",
+                        "surface": "#f9f9ff",
+                        "on-tertiary-container": "#584000",
+                        "on-surface-variant": "#534434",
+                        "surface-container": "#e7eefe",
+                        "on-secondary-container": "#00714d",
+                        "on-surface": "#151c27",
+                        "tertiary-fixed-dim": "#f9bd22",
+                        "secondary-container": "#6cf8bb",
+                        "on-primary-fixed-variant": "#653e00",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffddb8",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-fixed": "#ffdf9f",
+                        "on-background": "#151c27",
+                        "outline-variant": "#d8c3ad",
+                        "surface-variant": "#dce2f3",
+                        "surface-bright": "#f9f9ff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "outline": "#867461",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#2a1700",
+                        "surface-tint": "#855300",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-container": "#f59e0b",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e2e8f8",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "tertiary-container": "#e0a800",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#261a00",
+                        "secondary": "#006c49",
+                        "inverse-surface": "#2a313d",
+                        "secondary-fixed": "#6ffbbe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "caption": ["Manrope"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-sm": ["Plus Jakarta Sans"],
+                        "label-md": ["Manrope"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-sm": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .radio-custom:checked + label {
+            background-color: theme('colors.primary-container');
+            color: theme('colors.on-primary-container');
+            border-color: theme('colors.primary-container');
+        }
+        
+        .checkbox-custom:checked + label {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: theme('colors.secondary');
+            border-color: theme('colors.secondary');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased">
+<!-- TopNavBar (Shared Component) - Suppressed because this is a transactional/onboarding flow -->
+<header class="bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-gutter max-w-container-max mx-auto h-20">
+<div class="font-display-sm text-display-sm font-bold text-primary tracking-tight">
+                NutriCare Hub
+            </div>
+<div class="hidden md:flex space-x-6">
+<!-- Transactional page, nav links omitted to focus on task -->
+<span class="text-on-surface-variant font-label-md text-label-md">Assessment</span>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-32 pb-xl px-gutter max-w-container-max mx-auto w-full relative">
+<!-- Decorative Background Element -->
+<div class="absolute top-0 right-0 w-1/2 h-full -z-10 opacity-20 pointer-events-none" style="background: radial-gradient(circle at top right, theme('colors.primary-container'), transparent 70%);"></div>
+<div class="absolute bottom-0 left-0 w-1/2 h-full -z-10 opacity-10 pointer-events-none" style="background: radial-gradient(circle at bottom left, theme('colors.secondary-container'), transparent 70%);"></div>
+<div class="max-w-3xl mx-auto">
+<!-- Header Section -->
+<div class="text-center mb-lg">
+<h1 class="font-display-sm text-display-sm text-on-background mb-sm">Your Nutrition Journey Starts Here</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Help us understand your body, lifestyle, and goals to craft a personalized wellness plan just for you.</p>
+</div>
+<!-- Progress Indicator -->
+<div class="mb-lg">
+<div class="flex justify-between items-center relative">
+<div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-1 bg-surface-variant -z-10 rounded-full"></div>
+<div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1/3 h-1 bg-primary-container -z-10 rounded-full transition-all duration-500 ease-in-out" id="progress-bar"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center step-indicator active" data-step="1">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md text-label-md mb-2 shadow-sm transition-colors duration-300">1</div>
+<span class="font-caption text-caption text-on-surface-variant">Basics</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center step-indicator" data-step="2">
+<div class="w-10 h-10 rounded-full bg-surface text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md mb-2 transition-colors duration-300">2</div>
+<span class="font-caption text-caption text-on-surface-variant">Dietary</span>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center step-indicator" data-step="3">
+<div class="w-10 h-10 rounded-full bg-surface text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md mb-2 transition-colors duration-300">3</div>
+<span class="font-caption text-caption text-on-surface-variant">Goals</span>
+</div>
+</div>
+</div>
+<!-- Form Container -->
+<div class="glass-card rounded-xl p-md sm:p-lg relative overflow-hidden">
+<form id="assessment-form">
+<!-- Step 1: Basic Health Data -->
+<div class="form-step transition-opacity duration-300" id="step-1">
+<h2 class="font-headline-md text-headline-md text-on-background mb-md">Basic Health Data</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+<div>
+<label class="block font-label-md text-label-md text-on-background mb-xs" for="age">Age</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md p-4 text-body-md focus:ring-2 focus:ring-primary-container focus:border-transparent transition-shadow outline-none" id="age" placeholder="Years" type="number"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-background mb-xs" for="gender">Gender Identity</label>
+<select class="w-full bg-surface border border-outline-variant rounded-md p-4 text-body-md focus:ring-2 focus:ring-primary-container focus:border-transparent transition-shadow outline-none appearance-none" id="gender">
+<option disabled="" selected="" value="">Select</option>
+<option value="female">Female</option>
+<option value="male">Male</option>
+<option value="non-binary">Non-binary</option>
+<option value="prefer-not-to-say">Prefer not to say</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-background mb-xs" for="height">Height (cm)</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md p-4 text-body-md focus:ring-2 focus:ring-primary-container focus:border-transparent transition-shadow outline-none" id="height" placeholder="cm" type="number"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-background mb-xs" for="weight">Weight (kg)</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md p-4 text-body-md focus:ring-2 focus:ring-primary-container focus:border-transparent transition-shadow outline-none" id="weight" placeholder="kg" type="number"/>
+</div>
+</div>
+<div class="mb-lg">
+<label class="block font-label-md text-label-md text-on-background mb-sm">Activity Level</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+<div class="relative">
+<input class="sr-only radio-custom" id="activity-sedentary" name="activity" type="radio"/>
+<label class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-lg cursor-pointer transition-all hover:bg-surface-container-highest bg-surface text-center h-full" for="activity-sedentary">
+<span class="material-symbols-outlined text-3xl mb-xs" data-icon="chair">chair</span>
+<span class="font-label-md text-label-md block">Sedentary</span>
+<span class="font-caption text-caption text-on-surface-variant block mt-xs">Little to no exercise</span>
+</label>
+</div>
+<div class="relative">
+<input checked="" class="sr-only radio-custom" id="activity-active" name="activity" type="radio"/>
+<label class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-lg cursor-pointer transition-all hover:bg-surface-container-highest bg-surface text-center h-full" for="activity-active">
+<span class="material-symbols-outlined text-3xl mb-xs" data-icon="directions_walk">directions_walk</span>
+<span class="font-label-md text-label-md block">Moderately Active</span>
+<span class="font-caption text-caption text-on-surface-variant block mt-xs">Exercise 3-5 days/week</span>
+</label>
+</div>
+<div class="relative">
+<input class="sr-only radio-custom" id="activity-very-active" name="activity" type="radio"/>
+<label class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-lg cursor-pointer transition-all hover:bg-surface-container-highest bg-surface text-center h-full" for="activity-very-active">
+<span class="material-symbols-outlined text-3xl mb-xs" data-icon="fitness_center">fitness_center</span>
+<span class="font-label-md text-label-md block">Very Active</span>
+<span class="font-caption text-caption text-on-surface-variant block mt-xs">Heavy exercise 6-7 days/week</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2: Dietary Preferences (Hidden by default) -->
+<div class="form-step hidden opacity-0 transition-opacity duration-300" id="step-2">
+<h2 class="font-headline-md text-headline-md text-on-background mb-md">Dietary Preferences</h2>
+<div class="mb-md">
+<label class="block font-label-md text-label-md text-on-background mb-sm">Primary Diet</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-sm">
+<div class="relative">
+<input checked="" class="sr-only radio-custom" id="diet-omnivore" name="diet" type="radio"/>
+<label class="block p-sm border border-outline-variant rounded-md cursor-pointer text-center font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="diet-omnivore">Omnivore</label>
+</div>
+<div class="relative">
+<input class="sr-only radio-custom" id="diet-vegetarian" name="diet" type="radio"/>
+<label class="block p-sm border border-outline-variant rounded-md cursor-pointer text-center font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="diet-vegetarian">Vegetarian</label>
+</div>
+<div class="relative">
+<input class="sr-only radio-custom" id="diet-vegan" name="diet" type="radio"/>
+<label class="block p-sm border border-outline-variant rounded-md cursor-pointer text-center font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="diet-vegan">Vegan</label>
+</div>
+<div class="relative">
+<input class="sr-only radio-custom" id="diet-pescatarian" name="diet" type="radio"/>
+<label class="block p-sm border border-outline-variant rounded-md cursor-pointer text-center font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="diet-pescatarian">Pescatarian</label>
+</div>
+</div>
+</div>
+<div class="mb-lg">
+<label class="block font-label-md text-label-md text-on-background mb-sm">Allergies &amp; Intolerances (Select all that apply)</label>
+<div class="flex flex-wrap gap-sm">
+<div class="relative">
+<input class="sr-only checkbox-custom" id="allergy-dairy" type="checkbox"/>
+<label class="inline-block px-4 py-2 border border-outline-variant rounded-full cursor-pointer font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="allergy-dairy">Dairy-Free</label>
+</div>
+<div class="relative">
+<input class="sr-only checkbox-custom" id="allergy-gluten" type="checkbox"/>
+<label class="inline-block px-4 py-2 border border-outline-variant rounded-full cursor-pointer font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="allergy-gluten">Gluten-Free</label>
+</div>
+<div class="relative">
+<input class="sr-only checkbox-custom" id="allergy-nuts" type="checkbox"/>
+<label class="inline-block px-4 py-2 border border-outline-variant rounded-full cursor-pointer font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="allergy-nuts">Nut-Free</label>
+</div>
+<div class="relative">
+<input class="sr-only checkbox-custom" id="allergy-soy" type="checkbox"/>
+<label class="inline-block px-4 py-2 border border-outline-variant rounded-full cursor-pointer font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="allergy-soy">Soy-Free</label>
+</div>
+<div class="relative">
+<input class="sr-only checkbox-custom" id="allergy-shellfish" type="checkbox"/>
+<label class="inline-block px-4 py-2 border border-outline-variant rounded-full cursor-pointer font-label-md text-label-md hover:bg-surface-container-highest transition-colors" for="allergy-shellfish">Shellfish-Free</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 3: Nutrition Goals (Hidden by default) -->
+<div class="form-step hidden opacity-0 transition-opacity duration-300" id="step-3">
+<h2 class="font-headline-md text-headline-md text-on-background mb-md">Nutrition Goals</h2>
+<div class="mb-lg">
+<label class="block font-label-md text-label-md text-on-background mb-sm">Primary Objective</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+<div class="relative">
+<input class="sr-only radio-custom" id="goal-weight-loss" name="goal" type="radio"/>
+<label class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-lg cursor-pointer transition-all hover:bg-surface-container-highest bg-surface text-center h-full" for="goal-weight-loss">
+<span class="material-symbols-outlined text-3xl mb-xs" data-icon="trending_down">trending_down</span>
+<span class="font-label-md text-label-md block">Weight Loss</span>
+<span class="font-caption text-caption text-on-surface-variant block mt-xs">Sustainable fat reduction</span>
+</label>
+</div>
+<div class="relative">
+<input checked="" class="sr-only radio-custom" id="goal-maintenance" name="goal" type="radio"/>
+<label class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-lg cursor-pointer transition-all hover:bg-surface-container-highest bg-surface text-center h-full" for="goal-maintenance">
+<span class="material-symbols-outlined text-3xl mb-xs" data-icon="balance">balance</span>
+<span class="font-label-md text-label-md block">Maintenance</span>
+<span class="font-caption text-caption text-on-surface-variant block mt-xs">Overall health &amp; vitality</span>
+</label>
+</div>
+<div class="relative">
+<input class="sr-only radio-custom" id="goal-muscle-gain" name="goal" type="radio"/>
+<label class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-lg cursor-pointer transition-all hover:bg-surface-container-highest bg-surface text-center h-full" for="goal-muscle-gain">
+<span class="material-symbols-outlined text-3xl mb-xs" data-icon="trending_up">trending_up</span>
+<span class="font-label-md text-label-md block">Muscle Gain</span>
+<span class="font-caption text-caption text-on-surface-variant block mt-xs">Strength &amp; hypertrophy</span>
+</label>
+</div>
+</div>
+</div>
+<div class="mb-lg">
+<label class="block font-label-md text-label-md text-on-background mb-xs" for="additional-notes">Additional Notes or Concerns</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded-md p-4 text-body-md focus:ring-2 focus:ring-primary-container focus:border-transparent transition-shadow outline-none resize-none" id="additional-notes" placeholder="Tell us anything else we should know..." rows="3"></textarea>
+</div>
+</div>
+<!-- Navigation Buttons -->
+<div class="flex justify-between items-center mt-lg border-t border-surface-variant pt-md">
+<button class="hidden font-label-md text-label-md text-on-surface-variant border border-outline-variant rounded-md px-6 py-3 hover:bg-surface-container-highest transition-colors flex items-center" id="btn-back" type="button">
+<span class="material-symbols-outlined mr-2 text-sm" data-icon="arrow_back">arrow_back</span>
+                            Back
+                        </button>
+<div class="flex-grow"></div>
+<button class="font-label-md text-label-md bg-primary-container text-on-primary-container rounded-md px-8 py-3 hover:opacity-90 transition-opacity flex items-center" id="btn-next" type="button">
+                            Next
+                            <span class="material-symbols-outlined ml-2 text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="hidden font-label-md text-label-md bg-primary text-on-primary rounded-md px-8 py-3 hover:opacity-90 transition-opacity flex items-center" id="btn-submit" type="submit">
+                            Complete Profile
+                            <span class="material-symbols-outlined ml-2 text-sm" data-icon="check_circle">check_circle</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) - Suppressed for transactional flow, keeping minimal -->
+<footer class="w-full py-md mt-auto flex flex-col items-center justify-center opacity-70">
+<p class="font-caption text-caption text-on-surface-variant">© 2024 NutriCare Hub. Secure &amp; Confidential.</p>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const steps = document.querySelectorAll('.form-step');
+            const indicators = document.querySelectorAll('.step-indicator');
+            const btnNext = document.getElementById('btn-next');
+            const btnBack = document.getElementById('btn-back');
+            const btnSubmit = document.getElementById('btn-submit');
+            const progressBar = document.getElementById('progress-bar');
+            
+            let currentStep = 1;
+            const totalSteps = steps.length;
+
+            function updateUI() {
+                // Update Step Visibility
+                steps.forEach((step, index) => {
+                    if (index + 1 === currentStep) {
+                        step.classList.remove('hidden');
+                        // Small delay for fade in effect
+                        setTimeout(() => step.classList.remove('opacity-0'), 50);
+                    } else {
+                        step.classList.add('opacity-0');
+                        setTimeout(() => step.classList.add('hidden'), 300); // Wait for transition
+                    }
+                });
+
+                // Update Indicators
+                indicators.forEach((ind, index) => {
+                    const stepNum = index + 1;
+                    const circle = ind.querySelector('div');
+                    
+                    if (stepNum < currentStep) {
+                        // Completed
+                        circle.className = 'w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-md text-label-md mb-2 shadow-sm transition-colors duration-300';
+                        circle.innerHTML = '<span class="material-symbols-outlined text-sm">check</span>';
+                    } else if (stepNum === currentStep) {
+                        // Active
+                        circle.className = 'w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md text-label-md mb-2 shadow-sm transition-colors duration-300';
+                        circle.innerHTML = stepNum;
+                    } else {
+                        // Future
+                        circle.className = 'w-10 h-10 rounded-full bg-surface text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md mb-2 transition-colors duration-300';
+                        circle.innerHTML = stepNum;
+                    }
+                });
+
+                // Update Progress Bar Width
+                const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+                // Min width for visual start
+                progressBar.style.width = currentStep === 1 ? '15%' : `${progressPercentage}%`;
+
+                // Update Buttons
+                if (currentStep === 1) {
+                    btnBack.classList.add('hidden');
+                } else {
+                    btnBack.classList.remove('hidden');
+                }
+
+                if (currentStep === totalSteps) {
+                    btnNext.classList.add('hidden');
+                    btnSubmit.classList.remove('hidden');
+                } else {
+                    btnNext.classList.remove('hidden');
+                    btnSubmit.classList.add('hidden');
+                }
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateUI();
+                }
+            });
+
+            btnBack.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    currentStep--;
+                    updateUI();
+                }
+            });
+
+            document.getElementById('assessment-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Simulation of form submission
+                btnSubmit.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">autorenew</span> Saving...';
+                btnSubmit.classList.add('opacity-70', 'cursor-not-allowed');
+                
+                setTimeout(() => {
+                    alert('Assessment saved successfully! Redirecting to your dashboard...');
+                    btnSubmit.innerHTML = 'Complete Profile <span class="material-symbols-outlined ml-2 text-sm" data-icon="check_circle">check_circle</span>';
+                    btnSubmit.classList.remove('opacity-70', 'cursor-not-allowed');
+                }, 1500);
+            });
+            
+            // Initial render
+            updateUI();
+        });
+    </script>
+</body></html>
