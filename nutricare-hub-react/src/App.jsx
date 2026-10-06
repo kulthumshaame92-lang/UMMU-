@@ -10,6 +10,9 @@ import PersonalizedDietPlan from './components/diet/PersonalizedDietPlan';
 import RecipesHub from './components/recipes/RecipesHub';
 import EducationHub from './components/education/EducationHub';
 import BookConsultationPage from './components/booking/BookConsultationPage';
+import SignInPage from './components/auth/SignInPage';
+import SignOutPage from './components/auth/SignOutPage';
+import AdminDashboard from './components/admin/AdminDashboard';
 import BookingModal from './components/modals/BookingModal';
 import RecipeDetailModal from './components/recipes/RecipeDetailModal';
 
@@ -34,6 +37,15 @@ function MainApp() {
       case 'booking':
       case 'consultation':
         return <BookConsultationPage />;
+      case 'signin':
+      case 'login':
+      case 'auth':
+        return <SignInPage />;
+      case 'signout':
+      case 'logout':
+        return <SignOutPage />;
+      case 'admin':
+        return <AdminDashboard />;
       default:
         return <HomePage />;
     }

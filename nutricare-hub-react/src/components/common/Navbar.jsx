@@ -65,7 +65,7 @@ export default function Navbar() {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
                   isActive
                     ? 'text-primary bg-primary-container/15 font-bold shadow-xs border-b-2 border-primary'
                     : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-low'
@@ -78,7 +78,7 @@ export default function Navbar() {
         </div>
 
         {/* Action CTAs & Auth Controls */}
-        <div className="flex items-center space-x-2.5">
+        <div className="flex items-center space-x-2 sm:space-x-3">
           {/* Book Consultation Primary CTA */}
           <button
             onClick={() => handleNavClick('booking')}
@@ -94,11 +94,11 @@ export default function Navbar() {
 
           {/* Auth Button / Profile Menu */}
           {isAuthenticated && user ? (
-            <div className="relative">
+            <div className="flex items-center gap-2">
               <button
-                onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                onClick={() => handleNavClick('signin')}
                 className="flex items-center gap-2 p-1.5 rounded-xl border border-surface-container hover:bg-surface-container transition-colors cursor-pointer"
-                title="Account Menu"
+                title="View Profile & Session"
               >
                 <img
                   src={user.avatar || "https://images.unsplash.com/photo-1594824813627-c3773fb2a95c?auto=format&fit=crop&q=80&w=200"}
@@ -110,69 +110,26 @@ export default function Navbar() {
                 </span>
               </button>
 
-              {/* User Dropdown */}
-              {userDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-surface rounded-2xl border border-surface-container shadow-2xl p-2 z-50 animate-fadeIn">
-                  <div className="px-3 py-2 border-b border-surface-container">
-                    <p className="text-xs font-bold text-on-surface truncate">{user.name}</p>
-                    <p className="text-[11px] text-on-surface-variant truncate">{user.email}</p>
-                    <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 bg-primary-container/20 text-primary rounded-full">
-                      {user.role === 'admin' ? '👑 Administrator' : '👤 Client'}
-                    </span>
-                  </div>
-
-                  <div className="py-1 space-y-1">
-                    <button
-                      onClick={() => handleNavClick('admin')}
-                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2 cursor-pointer"
-                    >
-                      <LayoutDashboard className="w-4 h-4 text-primary" />
-                      <span>Admin Dashboard</span>
-                    </button>
-
-                    <button
-                      onClick={() => handleNavClick('diet-plan')}
-                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2 cursor-pointer"
-                    >
-                      <Utensils className="w-4 h-4 text-secondary" />
-                      <span>My Diet Protocol</span>
-                    </button>
-
-                    <button
-                      onClick={() => handleNavClick('signin')}
-                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2 cursor-pointer"
-                    >
-                      <User className="w-4 h-4 text-on-surface-variant" />
-                      <span>Account Details</span>
-                    </button>
-                  </div>
-
-                  <div className="pt-1 border-t border-surface-container">
-                    <button
-                      onClick={() => {
-                        logout();
-                        setUserDropdownOpen(false);
-                      }}
-                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 flex items-center gap-2 cursor-pointer"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      <span>Sign Out</span>
-                    </button>
-                  </div>
-                </div>
-              )}
+              <button
+                onClick={() => handleNavClick('signout')}
+                className="p-2 sm:px-3 sm:py-2 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold flex items-center gap-1 cursor-pointer transition-all shadow-xs"
+                title="Sign Out"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Sign Out</span>
+              </button>
             </div>
           ) : (
             <button
               onClick={() => handleNavClick('signin')}
-              className={`p-2 sm:px-3.5 sm:py-2 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`p-2 sm:px-4 sm:py-2 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                 currentPage === 'signin'
                   ? 'bg-primary text-white border-primary shadow-xs'
                   : 'border-outline-variant hover:border-primary text-on-surface hover:bg-surface-container-low'
               }`}
             >
               <LogIn className="w-4 h-4 text-primary" />
-              <span className="hidden sm:inline">Sign In</span>
+              <span>Sign In</span>
             </button>
           )}
 
@@ -212,10 +169,7 @@ export default function Navbar() {
           <div className="pt-4 border-t border-surface-container flex flex-col gap-2.5">
             {isAuthenticated ? (
               <button
-                onClick={() => {
-                  logout();
-                  setMobileMenuOpen(false);
-                }}
+                onClick={() => handleNavClick('signout')}
                 className="w-full flex items-center justify-center bg-rose-50 text-rose-700 border border-rose-200 font-bold py-3 px-4 rounded-xl gap-2"
               >
                 <LogOut className="w-4 h-4" />
@@ -227,7 +181,7 @@ export default function Navbar() {
                 className="w-full flex items-center justify-center bg-surface border border-outline-variant text-on-surface font-bold py-3 px-4 rounded-xl gap-2"
               >
                 <LogIn className="w-4 h-4 text-primary" />
-                Sign In to Portal / Admin
+                Sign In / Admin Access
               </button>
             )}
 
