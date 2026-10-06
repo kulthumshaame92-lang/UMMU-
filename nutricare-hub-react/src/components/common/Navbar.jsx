@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Menu, X, Calendar, Sparkles, User, BookOpen, Utensils, Award } from 'lucide-react';
+import { 
+  Menu, 
+  X, 
+  Calendar, 
+  Sparkles, 
+  User, 
+  BookOpen, 
+  Utensils, 
+  Award, 
+  LogIn, 
+  LogOut, 
+  ShieldCheck, 
+  LayoutDashboard 
+} from 'lucide-react';
 
 export default function Navbar() {
-  const { currentPage, setCurrentPage } = useApp();
+  const { currentPage, setCurrentPage, user, isAuthenticated, isAdmin, logout } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
   const navItems = [
     { id: 'home', label: 'Home', icon: Sparkles },
@@ -18,6 +32,7 @@ export default function Navbar() {
   const handleNavClick = (pageId) => {
     setCurrentPage(pageId);
     setMobileMenuOpen(false);
+    setUserDropdownOpen(false);
   };
 
   return (
@@ -49,7 +64,7 @@ export default function Navbar() {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
                   isActive
                     ? 'text-primary bg-primary-container/15 font-bold shadow-xs border-b-2 border-primary'
                     : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-low'
@@ -61,27 +76,121 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Action CTAs */}
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={() => handleNavClick('assessment')}
-            className="hidden sm:inline-flex items-center text-sm font-semibold text-secondary hover:text-secondary-hover px-3 py-2 rounded-lg hover:bg-secondary-container/20 transition-all cursor-pointer"
-          >
-            <Sparkles className="w-4 h-4 mr-1.5 text-secondary" />
-            Free Quiz
-          </button>
+        {/* Action CTAs & Auth Controls */}
+        <div className="flex items-center space-x-2.5">
+          {/* Admin Portal Quick Link */}
+          {isAuthenticated && isAdmin && (
+            <button
+              onClick={() => handleNavClick('admin')}
+              className={`hidden md:inline-flex items-center text-xs font-bold px-3 py-2 rounded-xl transition-all cursor-pointer ${
+                currentPage === 'admin'
+                  ? 'bg-primary text-white shadow-xs'
+                  : 'bg-primary-container/20 text-primary hover:bg-primary-container/30'
+              }`}
+            >
+              <LayoutDashboard className="w-3.5 h-3.5 mr-1.5" />
+              Admin Portal
+            </button>
+          )}
 
+          {/* Book Consultation Primary CTA */}
           <button
             onClick={() => handleNavClick('booking')}
-            className={`hidden md:inline-flex items-center font-semibold px-5 py-2.5 rounded-full text-sm shadow-[0_4px_16px_rgba(245,158,11,0.25)] hover:shadow-[0_6px_20px_rgba(245,158,11,0.35)] transform hover:-translate-y-0.5 transition-all cursor-pointer ${
+            className={`hidden sm:inline-flex items-center font-semibold px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm shadow-[0_4px_16px_rgba(245,158,11,0.25)] hover:shadow-[0_6px_20px_rgba(245,158,11,0.35)] transform hover:-translate-y-0.5 transition-all cursor-pointer ${
               currentPage === 'booking'
                 ? 'bg-amber-500 text-on-primary-container ring-2 ring-primary font-bold'
                 : 'bg-primary-container hover:bg-amber-500 text-on-primary-container'
             }`}
           >
-            <Calendar className="w-4 h-4 mr-2" />
+            <Calendar className="w-4 h-4 mr-1.5" />
             Book Consultation
           </button>
+
+          {/* Auth Button / Profile Menu */}
+          {isAuthenticated && user ? (
+            <div className="relative">
+              <button
+                onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                className="flex items-center gap-2 p-1.5 rounded-xl border border-surface-container hover:bg-surface-container transition-colors cursor-pointer"
+                title="Account Menu"
+              >
+                <img
+                  src={user.avatar || "https://images.unsplash.com/photo-1594824813627-c3773fb2a95c?auto=format&fit=crop&q=80&w=200"}
+                  alt={user.name}
+                  className="w-7 h-7 rounded-full object-cover border border-primary-container"
+                />
+                <span className="hidden xl:inline text-xs font-bold text-on-surface max-w-[90px] truncate">
+                  {user.name.split(' ')[0]}
+                </span>
+              </button>
+
+              {/* User Dropdown */}
+              {userDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-56 bg-surface rounded-2xl border border-surface-container shadow-2xl p-2 z-50 animate-fadeIn">
+                  <div className="px-3 py-2 border-b border-surface-container">
+                    <p className="text-xs font-bold text-on-surface truncate">{user.name}</p>
+                    <p className="text-[11px] text-on-surface-variant truncate">{user.email}</p>
+                    <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 bg-primary-container/20 text-primary rounded-full">
+                      {user.role === 'admin' ? '👑 Administrator' : '👤 Client'}
+                    </span>
+                  </div>
+
+                  <div className="py-1 space-y-1">
+                    {isAdmin && (
+                      <button
+                        onClick={() => handleNavClick('admin')}
+                        className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2 cursor-pointer"
+                      >
+                        <LayoutDashboard className="w-4 h-4 text-primary" />
+                        <span>Admin Dashboard</span>
+                      </button>
+                    )}
+
+                    <button
+                      onClick={() => handleNavClick('diet-plan')}
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2 cursor-pointer"
+                    >
+                      <Utensils className="w-4 h-4 text-secondary" />
+                      <span>My Diet Protocol</span>
+                    </button>
+
+                    <button
+                      onClick={() => handleNavClick('signin')}
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2 cursor-pointer"
+                    >
+                      <User className="w-4 h-4 text-on-surface-variant" />
+                      <span>Account Details</span>
+                    </button>
+                  </div>
+
+                  <div className="pt-1 border-t border-surface-container">
+                    <button
+                      onClick={() => {
+                        logout();
+                        setUserDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 flex items-center gap-2 cursor-pointer"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={() => handleNavClick('signin')}
+              className={`p-2 sm:px-3.5 sm:py-2 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                currentPage === 'signin'
+                  ? 'bg-primary text-white border-primary shadow-xs'
+                  : 'border-outline-variant hover:border-primary text-on-surface hover:bg-surface-container-low'
+              }`}
+            >
+              <LogIn className="w-4 h-4 text-primary" />
+              <span className="hidden sm:inline">Sign In</span>
+            </button>
+          )}
 
           {/* Mobile Menu Toggle */}
           <button
@@ -116,20 +225,45 @@ export default function Navbar() {
             );
           })}
 
-          <div className="pt-4 border-t border-surface-container flex flex-col gap-3">
+          <div className="pt-4 border-t border-surface-container flex flex-col gap-2.5">
+            {isAuthenticated ? (
+              <>
+                {isAdmin && (
+                  <button
+                    onClick={() => handleNavClick('admin')}
+                    className="w-full flex items-center justify-center bg-primary-container text-on-primary-container font-bold py-3 px-4 rounded-xl shadow-md gap-2"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    Admin Dashboard
+                  </button>
+                )}
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full flex items-center justify-center bg-rose-50 text-rose-700 border border-rose-200 font-bold py-3 px-4 rounded-xl gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sign Out ({user.name})
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={() => handleNavClick('signin')}
+                className="w-full flex items-center justify-center bg-surface border border-outline-variant text-on-surface font-bold py-3 px-4 rounded-xl gap-2"
+              >
+                <LogIn className="w-4 h-4 text-primary" />
+                Sign In to Portal / Admin
+              </button>
+            )}
+
             <button
               onClick={() => handleNavClick('booking')}
-              className="w-full flex items-center justify-center bg-primary-container text-on-primary-container font-bold py-3 px-4 rounded-xl shadow-md"
+              className="w-full flex items-center justify-center bg-primary-container text-on-primary-container font-bold py-3 px-4 rounded-xl shadow-md gap-2"
             >
-              <Calendar className="w-4 h-4 mr-2" />
+              <Calendar className="w-4 h-4" />
               Book Consultation
-            </button>
-            <button
-              onClick={() => handleNavClick('assessment')}
-              className="w-full flex items-center justify-center bg-surface-container text-primary font-semibold py-3 px-4 rounded-xl"
-            >
-              <Sparkles className="w-4 h-4 mr-2" />
-              Start Nutrition Assessment
             </button>
           </div>
         </div>

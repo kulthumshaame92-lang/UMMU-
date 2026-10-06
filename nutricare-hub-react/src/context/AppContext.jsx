@@ -11,6 +11,19 @@ export function AppProvider({ children }) {
   const [selectedTier, setSelectedTier] = useState(null);
   const [toast, setToast] = useState(null);
 
+  // Authentication State
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('nutricare_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const isAuthenticated = !!user;
+  const isAdmin = user?.role === 'admin';
+
   // User assessment profile
   const [assessmentData, setAssessmentData] = useState({
     age: '28',
@@ -34,6 +47,28 @@ export function AppProvider({ children }) {
   const setCurrentPage = (page) => {
     setCurrentPageState(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const login = (userData) => {
+    setUser(userData);
+    try {
+      localStorage.setItem('nutricare_user', JSON.stringify(userData));
+    } catch {}
+    showToast(`Signed in successfully as ${userData.name}!`, 'success');
+    if (userData.role === 'admin') {
+      setCurrentPage('admin');
+    } else {
+      setCurrentPage('diet-plan');
+    }
+  };
+
+  const logout = () => {
+    setUser(null);
+    try {
+      localStorage.removeItem('nutricare_user');
+    } catch {}
+    showToast('Signed out of NutriCare Hub session.', 'info');
+    setCurrentPage('signin');
   };
 
   const showToast = (message, type = 'success') => {
@@ -70,7 +105,7 @@ export function AppProvider({ children }) {
 
     const updatedPlan = {
       ...DEFAULT_DIET_PLAN,
-      clientName: "Alex Morgan",
+      clientName: user?.name || "Alex Morgan",
       planTitle: `${data.dietType.charAt(0).toUpperCase() + data.dietType.slice(1)} Wellness Protocol`,
       targetCal: tdee,
       currentCal: tdee - 30,
@@ -107,6 +142,11 @@ export function AppProvider({ children }) {
       value={{
         currentPage,
         setCurrentPage,
+        user,
+        isAuthenticated,
+        isAdmin,
+        login,
+        logout,
         selectedNutritionist,
         setSelectedNutritionist,
         isBookingModalOpen,
