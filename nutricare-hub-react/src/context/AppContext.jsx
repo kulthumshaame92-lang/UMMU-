@@ -5,7 +5,16 @@ import { DEFAULT_DIET_PLAN } from '../data/dietPlansData';
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [currentPage, setCurrentPageState] = useState('home');
+  const [currentPage, setCurrentPageState] = useState(() => {
+    try {
+      const hash = window.location.hash.replace('#', '').trim();
+      if (hash && ['home', 'assessment', 'diet-plan', 'nutritionist', 'recipes', 'education', 'booking', 'consultation', 'signin', 'signout', 'admin'].includes(hash)) {
+        return hash;
+      }
+    } catch {}
+    return 'home';
+  });
+
   const [selectedNutritionist, setSelectedNutritionist] = useState(NUTRITIONISTS[0]);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedTier, setSelectedTier] = useState(null);
@@ -23,6 +32,21 @@ export function AppProvider({ children }) {
 
   const isAuthenticated = !!user;
   const isAdmin = user?.role === 'admin';
+
+  // Listen for hash changes in browser URL (e.g. #admin, #signin)
+  useEffect(() => {
+    const handleHashChange = () => {
+      try {
+        const hash = window.location.hash.replace('#', '').trim();
+        if (hash && ['home', 'assessment', 'diet-plan', 'nutritionist', 'recipes', 'education', 'booking', 'consultation', 'signin', 'signout', 'admin'].includes(hash)) {
+          setCurrentPageState(hash);
+        }
+      } catch {}
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // User assessment profile
   const [assessmentData, setAssessmentData] = useState({
@@ -46,6 +70,9 @@ export function AppProvider({ children }) {
 
   const setCurrentPage = (page) => {
     setCurrentPageState(page);
+    try {
+      window.location.hash = page;
+    } catch {}
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
