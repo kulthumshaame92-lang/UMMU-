@@ -25,13 +25,14 @@ import {
   X, 
   FileText,
   Activity,
-  Award
+  Award,
+  LogIn
 } from 'lucide-react';
 
 export default function AdminDashboard() {
-  const { user, logout, showToast, setCurrentPage } = useApp();
+  const { user, isAuthenticated, isAdmin, login, logout, showToast, setCurrentPage } = useApp();
 
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'bookings', 'assessments', 'recipes', 'staff', 'audit'
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'bookings', 'assessments', 'recipes', 'staff'
   const [searchQuery, setSearchQuery] = useState('');
   const [bookingFilter, setBookingFilter] = useState('All');
 
@@ -188,6 +189,15 @@ export default function AdminDashboard() {
     showToast("HIPAA compliant telemetry & bookings CSV exported successfully!", "success");
   };
 
+  const handleInstantAdminLogin = () => {
+    login({
+      name: 'Dr. Sarah Jenkins, RD, PhD',
+      email: 'admin@nutricarehub.com',
+      role: 'admin',
+      avatar: 'https://images.unsplash.com/photo-1594824813627-c3773fb2a95c?auto=format&fit=crop&q=80&w=400'
+    });
+  };
+
   const filteredBookings = bookings.filter(b => {
     const matchesSearch = b.client.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           b.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -198,6 +208,28 @@ export default function AdminDashboard() {
 
   return (
     <div className="w-full max-w-container-max mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fadeIn">
+      {/* Demo Notice Banner if not logged in */}
+      {(!isAuthenticated || !isAdmin) && (
+        <div className="bg-primary-container/20 border border-primary/40 rounded-2xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">
+              👑
+            </div>
+            <div>
+              <p className="text-xs font-bold text-on-surface">Clinical Admin Console (Interactive Preview)</p>
+              <p className="text-[11px] text-on-surface-variant">You have live access to test and manage consultations, client intakes, and recipes.</p>
+            </div>
+          </div>
+          <button
+            onClick={handleInstantAdminLogin}
+            className="w-full sm:w-auto px-4 py-2 rounded-xl bg-primary-container hover:bg-amber-500 text-on-primary-container font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 cursor-pointer transition-all whitespace-nowrap"
+          >
+            <LogIn className="w-3.5 h-3.5" />
+            <span>1-Click Sign In as Admin</span>
+          </button>
+        </div>
+      )}
+
       {/* Top Admin Navigation Header */}
       <div className="bg-surface rounded-3xl p-6 sm:p-8 border border-surface-container shadow-xl mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
@@ -245,13 +277,23 @@ export default function AdminDashboard() {
             View Live Site
           </button>
 
-          <button
-            onClick={logout}
-            className="px-5 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all shadow-xs"
-          >
-            <LogOut className="w-4 h-4" />
-            <span>Sign Out</span>
-          </button>
+          {isAuthenticated ? (
+            <button
+              onClick={logout}
+              className="px-5 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all shadow-xs"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Sign Out</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => setCurrentPage('signin')}
+              className="px-5 py-2.5 rounded-xl bg-primary-container hover:bg-amber-500 text-on-primary-container text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all shadow-xs"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Sign In</span>
+            </button>
+          )}
         </div>
       </div>
 

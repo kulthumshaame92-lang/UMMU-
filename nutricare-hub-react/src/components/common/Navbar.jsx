@@ -27,6 +27,7 @@ export default function Navbar() {
     { id: 'nutritionist', label: 'Dietitians', icon: Award },
     { id: 'recipes', label: 'Recipes', icon: Utensils },
     { id: 'education', label: 'Education', icon: BookOpen },
+    { id: 'admin', label: 'Admin Portal', icon: LayoutDashboard },
   ];
 
   const handleNavClick = (pageId) => {
@@ -57,14 +58,14 @@ export default function Navbar() {
         </button>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+        <div className="hidden lg:flex items-center space-x-1 xl:space-x-1.5">
           {navItems.map((item) => {
             const isActive = currentPage === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
                   isActive
                     ? 'text-primary bg-primary-container/15 font-bold shadow-xs border-b-2 border-primary'
                     : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-low'
@@ -78,21 +79,6 @@ export default function Navbar() {
 
         {/* Action CTAs & Auth Controls */}
         <div className="flex items-center space-x-2.5">
-          {/* Admin Portal Quick Link */}
-          {isAuthenticated && isAdmin && (
-            <button
-              onClick={() => handleNavClick('admin')}
-              className={`hidden md:inline-flex items-center text-xs font-bold px-3 py-2 rounded-xl transition-all cursor-pointer ${
-                currentPage === 'admin'
-                  ? 'bg-primary text-white shadow-xs'
-                  : 'bg-primary-container/20 text-primary hover:bg-primary-container/30'
-              }`}
-            >
-              <LayoutDashboard className="w-3.5 h-3.5 mr-1.5" />
-              Admin Portal
-            </button>
-          )}
-
           {/* Book Consultation Primary CTA */}
           <button
             onClick={() => handleNavClick('booking')}
@@ -136,15 +122,13 @@ export default function Navbar() {
                   </div>
 
                   <div className="py-1 space-y-1">
-                    {isAdmin && (
-                      <button
-                        onClick={() => handleNavClick('admin')}
-                        className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2 cursor-pointer"
-                      >
-                        <LayoutDashboard className="w-4 h-4 text-primary" />
-                        <span>Admin Dashboard</span>
-                      </button>
-                    )}
+                    <button
+                      onClick={() => handleNavClick('admin')}
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2 cursor-pointer"
+                    >
+                      <LayoutDashboard className="w-4 h-4 text-primary" />
+                      <span>Admin Dashboard</span>
+                    </button>
 
                     <button
                       onClick={() => handleNavClick('diet-plan')}
@@ -227,27 +211,16 @@ export default function Navbar() {
 
           <div className="pt-4 border-t border-surface-container flex flex-col gap-2.5">
             {isAuthenticated ? (
-              <>
-                {isAdmin && (
-                  <button
-                    onClick={() => handleNavClick('admin')}
-                    className="w-full flex items-center justify-center bg-primary-container text-on-primary-container font-bold py-3 px-4 rounded-xl shadow-md gap-2"
-                  >
-                    <LayoutDashboard className="w-4 h-4" />
-                    Admin Dashboard
-                  </button>
-                )}
-                <button
-                  onClick={() => {
-                    logout();
-                    setMobileMenuOpen(false);
-                  }}
-                  className="w-full flex items-center justify-center bg-rose-50 text-rose-700 border border-rose-200 font-bold py-3 px-4 rounded-xl gap-2"
-                >
-                  <LogOut className="w-4 h-4" />
-                  Sign Out ({user.name})
-                </button>
-              </>
+              <button
+                onClick={() => {
+                  logout();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center bg-rose-50 text-rose-700 border border-rose-200 font-bold py-3 px-4 rounded-xl gap-2"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out ({user.name})
+              </button>
             ) : (
               <button
                 onClick={() => handleNavClick('signin')}
