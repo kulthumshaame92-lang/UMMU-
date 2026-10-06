@@ -5,6 +5,8 @@ node_modules/
 .pnp.js
 
 # Production / Build Output
+# Allow nutricare-hub-react dist for Cloudflare Workers deployment
+!nutricare-hub-react/dist/
 dist/
 dist-ssr/
 build/
