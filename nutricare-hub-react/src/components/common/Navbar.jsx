@@ -13,6 +13,7 @@ export default function Navbar() {
     { id: 'nutritionist', label: 'Dietitians', icon: Award },
     { id: 'recipes', label: 'Recipes', icon: Utensils },
     { id: 'education', label: 'Education', icon: BookOpen },
+    { id: 'booking', label: 'Book Consultation', icon: Calendar },
   ];
 
   const handleNavClick = (pageId) => {
@@ -42,14 +43,14 @@ export default function Navbar() {
         </button>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+        <div className="hidden lg:flex items-center space-x-1 xl:space-x-1.5">
           {navItems.map((item) => {
             const isActive = currentPage === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
                   isActive
                     ? 'text-primary bg-primary-container/15 font-bold shadow-xs border-b-2 border-primary'
                     : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-low'
@@ -72,7 +73,7 @@ export default function Navbar() {
           </button>
 
           <button
-            onClick={() => openBooking()}
+            onClick={() => setCurrentPage('booking')}
             className="hidden md:inline-flex items-center bg-primary-container hover:bg-amber-500 text-on-primary-container font-semibold px-5 py-2.5 rounded-full text-sm shadow-[0_4px_16px_rgba(245,158,11,0.25)] hover:shadow-[0_6px_20px_rgba(245,158,11,0.35)] transform hover:-translate-y-0.5 transition-all cursor-pointer"
           >
             <Calendar className="w-4 h-4 mr-2" />
@@ -115,7 +116,7 @@ export default function Navbar() {
           <div className="pt-4 border-t border-surface-container flex flex-col gap-3">
             <button
               onClick={() => {
-                openBooking();
+                setCurrentPage('booking');
                 setMobileMenuOpen(false);
               }}
               className="w-full flex items-center justify-center bg-primary-container text-on-primary-container font-bold py-3 px-4 rounded-xl shadow-md"

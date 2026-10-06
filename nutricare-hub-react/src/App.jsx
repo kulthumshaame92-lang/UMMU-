@@ -9,8 +9,9 @@ import NutritionistProfile from './components/nutritionist/NutritionistProfile';
 import PersonalizedDietPlan from './components/diet/PersonalizedDietPlan';
 import RecipesHub from './components/recipes/RecipesHub';
 import EducationHub from './components/education/EducationHub';
+import BookConsultationPage from './components/booking/BookConsultationPage';
 import BookingModal from './components/modals/BookingModal';
-import MealDetailModal from './components/modals/MealDetailModal';
+import RecipeDetailModal from './components/recipes/RecipeDetailModal';
 
 function MainApp() {
   const { currentPage } = useApp();
@@ -30,6 +31,9 @@ function MainApp() {
         return <RecipesHub onSelectRecipe={(recipe) => setSelectedMealDetail(recipe)} />;
       case 'education':
         return <EducationHub />;
+      case 'booking':
+      case 'consultation':
+        return <BookConsultationPage />;
       default:
         return <HomePage />;
     }
@@ -50,8 +54,8 @@ function MainApp() {
 
       {/* Modals & Overlays */}
       <BookingModal />
-      <MealDetailModal
-        meal={selectedMealDetail}
+      <RecipeDetailModal
+        recipe={selectedMealDetail}
         onClose={() => setSelectedMealDetail(null)}
       />
       <Toast />

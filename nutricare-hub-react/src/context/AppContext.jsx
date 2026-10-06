@@ -88,9 +88,14 @@ export function AppProvider({ children }) {
     setCurrentPage('diet-plan');
   };
 
-  const openBooking = (tier = null) => {
-    setSelectedTier(tier || selectedNutritionist.consultationTiers[0]);
-    setIsBookingModalOpen(true);
+  const openBooking = (tier = null, useModal = false) => {
+    const targetTier = tier || selectedNutritionist?.consultationTiers?.[0];
+    if (targetTier) setSelectedTier(targetTier);
+    if (useModal) {
+      setIsBookingModalOpen(true);
+    } else {
+      setCurrentPage('booking');
+    }
   };
 
   const closeBooking = () => {

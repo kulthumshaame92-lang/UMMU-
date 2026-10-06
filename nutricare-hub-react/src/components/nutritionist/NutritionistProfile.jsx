@@ -11,17 +11,18 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Clock, 
-  Sparkles,
-  Heart,
-  MessageSquare
+  Sparkles, 
+  Heart, 
+  MessageSquare,
+  ArrowRight
 } from 'lucide-react';
 
 export default function NutritionistProfile() {
-  const { selectedNutritionist, openBooking, showToast } = useApp();
+  const { selectedNutritionist, setSelectedTier, setCurrentPage, showToast } = useApp();
   
   const [selectedMonth, setSelectedMonth] = useState('October 2026');
   const [selectedDate, setSelectedDate] = useState(15);
-  const [selectedTime, setSelectedTime] = useState('01:00 PM');
+  const [selectedTime, setSelectedTime] = useState('10:30 AM');
   const [selectedTierIndex, setSelectedTierIndex] = useState(0);
 
   const dates = [
@@ -43,11 +44,8 @@ export default function NutritionistProfile() {
 
   const handleBookingConfirm = () => {
     const tier = selectedNutritionist.consultationTiers[selectedTierIndex];
-    openBooking({
-      ...tier,
-      scheduledDate: `Tue, Oct ${selectedDate}`,
-      scheduledTime: selectedTime
-    });
+    setSelectedTier(tier);
+    setCurrentPage('booking');
   };
 
   const handleMessage = () => {
@@ -55,14 +53,14 @@ export default function NutritionistProfile() {
   };
 
   return (
-    <div className="w-full max-w-container-max mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="w-full max-w-container-max mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fadeIn">
       {/* Hero Profile Section */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16 items-center">
         {/* Dietitian Image Column with Trust Badge */}
         <div className="lg:col-span-5 relative">
           <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-ambient-md border border-surface-container relative">
             <img
-              src={selectedNutritionist.avatar || "https://lh3.googleusercontent.com/aida-public/AB6AXuC1TVl46Evxmg3SwGEiI3zuIq36GfMLqRRLm_ErlVnfvURBU-_RuSGllAyj7wuWj5tkycFUTomu-hx7FsNAOdLYD-2uU4BLzAXiYuQ8cBVS-jJYpn-nf-tH92h33YIidUeKsp3pLKl_R9TEGr6Ld-ssjbDRARXYJSRNsxLl4L0eCrFT-b-krYqgJQXJpZJKZ-KxIcM7rc-23dMmq1LqIn7gznxwirOApNwyaPU5xPoATKXJ8465qr2N1g"}
+              src={selectedNutritionist.avatar || "https://images.unsplash.com/photo-1594824813627-c3773fb2a95c?auto=format&fit=crop&q=80&w=400"}
               alt={selectedNutritionist.name}
               className="w-full h-full object-cover"
             />
@@ -118,13 +116,13 @@ export default function NutritionistProfile() {
           <div className="flex flex-wrap gap-4 items-center">
             <button
               onClick={() => {
-                const element = document.getElementById('booking-section');
-                element?.scrollIntoView({ behavior: 'smooth' });
+                setSelectedTier(selectedNutritionist.consultationTiers[0]);
+                setCurrentPage('booking');
               }}
               className="bg-primary-container hover:bg-amber-500 text-on-primary-container font-semibold px-7 py-3.5 rounded-xl text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
             >
               <Calendar className="w-4 h-4" />
-              <span>Book Consultation</span>
+              <span>Book Full Consultation</span>
             </button>
 
             <button
@@ -132,7 +130,7 @@ export default function NutritionistProfile() {
               className="border border-outline-variant hover:border-primary text-on-surface font-semibold px-6 py-3.5 rounded-xl text-sm hover:bg-surface-container-low transition-all flex items-center gap-2 cursor-pointer"
             >
               <Mail className="w-4 h-4 text-primary" />
-              <span>Send Message</span>
+              <span>Send Direct Message</span>
             </button>
           </div>
         </div>
@@ -320,7 +318,7 @@ export default function NutritionistProfile() {
               className="w-full bg-primary-container hover:bg-amber-500 text-on-primary-container font-bold py-3.5 px-4 rounded-xl text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Calendar className="w-4 h-4" />
-              <span>Confirm {selectedTime} Consultation</span>
+              <span>Continue in Full Intake Form ({selectedTime})</span>
             </button>
 
             <p className="text-[11px] text-center text-on-surface-variant mt-3">
